@@ -9,6 +9,7 @@ import { UpdateCandyService } from '../services/candy/UpdateCandyService';
 import { GetCandyService } from '../services/candy/GetCandyService';
 import { GetCandyByIdService } from '../services/candy/GetCandyByIdService';
 import { DeleteCandyService } from '../services/candy/DeleteCandyService';
+import { CandyImageService } from '../services/candy/CandyImageService';
 
 class CandyController {
 
@@ -75,6 +76,14 @@ class CandyController {
         await deleteCandyService.execute(id);
 
         return res.status(204).end();
+    }
+
+    async candyImage(req: Request, res: Response) {
+        const filename = req.query.filename as string;
+        const candyImageService = new CandyImageService();
+        const candyImage = await candyImageService.execute(filename);
+
+        return res.json(candyImage);
     }
 }
 

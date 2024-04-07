@@ -3,7 +3,8 @@ import dotenv from 'dotenv';
 import { router } from './routes';
 import 'express-async-errors';
 import cors from 'cors';
-import path from 'path'
+import path from 'path';
+import qs from 'qs';
 
 dotenv.config();
 const port = process.env.PORT ?? 3000;
@@ -15,7 +16,11 @@ app.use(router);
 app.use(
     '/files',
     express.static(path.resolve(__dirname, '..', 'uploads'))
-  )
+  );
+
+app.set('query parser', function (str: any) {
+  return qs.parse(str, { /* custom options */ })
+})
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   if(err instanceof Error){
