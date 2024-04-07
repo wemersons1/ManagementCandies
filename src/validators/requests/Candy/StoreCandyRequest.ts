@@ -1,21 +1,23 @@
 import { body, validationResult } from 'express-validator';
 import { NextFunction, Request, Response } from 'express';
 
-const rulesUpdateUserRequest = [
-    body('name').optional().isString(),
-    body('email').optional().isEmail(),
-    body('password_confirmation').optional().isString().isLength({ min: 8}),
-    body('password').optional().isString().isLength({ min: 8}),
+const rulesStoreCandyRequest = [
+    body('name').isString().notEmpty(),        
+    body('quantity').isInt({ min: 0 }),
+    body('price').isNumeric().notEmpty(),
+    body('category_id').isInt({min: 0}).notEmpty(),    
 ];
 
-class UpdateUserRequest {
+class StoreCandyRequest {
     async handle(req: Request, res: Response, nextFunction: NextFunction) {
+        console.log(req.file);
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }       
+
         nextFunction();
     }
 }
 
-export { rulesUpdateUserRequest, UpdateUserRequest };
+export { rulesStoreCandyRequest, StoreCandyRequest };

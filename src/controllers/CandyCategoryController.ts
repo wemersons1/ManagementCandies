@@ -26,17 +26,17 @@ class CandyCategoryController {
 
     async index(req: Request, res: Response) {
         const getCandyCategoryService = new GetCandyCategoryService();
-        const getCandyCategory = await getCandyCategoryService.execute();
+        const candiesCategory = await getCandyCategoryService.execute();
 
-        return res.json(getCandyCategory);
+        return res.json(candiesCategory);
     }
 
     async show(req: Request, res: Response) {
         const { id } = req.params;
         const getCandyCategoryByIdService = new GetCandyCategoryByIdService();
-        const candyCategoryById = await getCandyCategoryByIdService.execute(+id);
+        const candyCategory = await getCandyCategoryByIdService.execute(+id);
 
-        return res.json(candyCategoryById);
+        return res.json(candyCategory);
     }
 
     async destroy(req: Request, res: Response) {
