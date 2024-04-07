@@ -11,7 +11,6 @@ interface UserInteface {
 class CreateUserService {
     async execute(userData: UserInteface) {
         const { name, email, password } = userData;
-        
         const userAlreadExist = await dbClient.user.findFirst({
             where: {
                 email

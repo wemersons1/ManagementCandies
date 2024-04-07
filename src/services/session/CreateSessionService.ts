@@ -30,6 +30,7 @@ class CreateSessionService {
         const secret = process.env.JWT_SECRET;
 
         const token = sign({
+            id: user.id,
             name: user.name,
             email: user.email
         }, 

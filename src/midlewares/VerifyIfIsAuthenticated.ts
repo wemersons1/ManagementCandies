@@ -7,7 +7,6 @@ interface Payload {
 
 const VerifyIfIsAuthenticated = (req: Request, res: Response, nextFunction: NextFunction) => {
     const authorizationToken = req.headers.authorization;
-
     if(!authorizationToken) {
         return res.status(401).end();
     }
@@ -19,6 +18,7 @@ const VerifyIfIsAuthenticated = (req: Request, res: Response, nextFunction: Next
         const decoded = verify(token, process.env.JWT_SECRET) as Payload;
         const { id: user_id } = decoded;
         if(user_id) {
+
             req.user_id = user_id;
             nextFunction();
         }

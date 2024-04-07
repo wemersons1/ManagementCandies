@@ -9,7 +9,7 @@ interface UserInteface {
 }
 
 class UpdateUserService {
-    async execute(id, userData: UserInteface) {
+    async execute(id: string, userData: UserInteface) {
         const { name, email, password } = userData;
         
         const user = await dbClient.user.findFirst({

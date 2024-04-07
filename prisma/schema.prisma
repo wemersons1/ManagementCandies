@@ -40,6 +40,7 @@ model Candy {
   name String
   quantity Int
   image String
+  price Float
   category CandyCategory @relation(fields: [category_id], references: [id])
   category_id Int
   created_at DateTime? @default(now())
