@@ -4,7 +4,10 @@ import path from 'path';
 class CandyImageService {
 
     async execute(filename: string) {
-        return await this.readImage(filename);
+        const candy_image = await this.readImage(filename);
+        return {
+            candy_image
+        };
     }
 
     async readImage(filename: string) {
@@ -22,7 +25,6 @@ class CandyImageService {
             });
         });
     }
-  
 }
 
 export { CandyImageService };

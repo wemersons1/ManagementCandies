@@ -7,7 +7,7 @@ import path from 'path';
 import qs from 'qs';
 
 dotenv.config();
-const port = process.env.PORT ?? 3000;
+const port = process.env.APP_PORT ?? 3000;
 const app = express();
 
 app.use(express.json());

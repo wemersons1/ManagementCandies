@@ -10,6 +10,7 @@ import { GetCandyService } from '../services/candy/GetCandyService';
 import { GetCandyByIdService } from '../services/candy/GetCandyByIdService';
 import { DeleteCandyService } from '../services/candy/DeleteCandyService';
 import { CandyImageService } from '../services/candy/CandyImageService';
+import { CandyReportService } from '../services/candy/CandyReportService';
 
 class CandyController {
 
@@ -84,6 +85,12 @@ class CandyController {
         const candyImage = await candyImageService.execute(filename);
 
         return res.json(candyImage);
+    }
+
+    async report(req: Request, res: Response) {
+        const candyReportService = new CandyReportService();
+        const candyReport = await candyReportService.execute();
+        return res.json(candyReport);
     }
 }
 

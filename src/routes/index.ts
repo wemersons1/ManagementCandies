@@ -31,10 +31,12 @@ router.get('/categories/:id', VerifyIfIsAuthenticated,  new CandyCategoryControl
 router.delete('/categories/:id', VerifyIfIsAuthenticated,  new CandyCategoryController().destroy);
 
 router.post('/candies', VerifyIfIsAuthenticated, upload.single('image'), rulesStoreCandyRequest, new StoreCandyRequest().handle, new CandyController().store);
-router.put('/candies/:id', VerifyIfIsAuthenticated, upload.single('image'), rulesUpdateCandyRequest, new UpdateCandyRequest().handle, new CandyController().update);
+router.get('/candies/report', VerifyIfIsAuthenticated,  new CandyController().report);
 router.get('/candies/image', VerifyIfIsAuthenticated, new CandyController().candyImage);
+router.put('/candies/:id', VerifyIfIsAuthenticated, upload.single('image'), rulesUpdateCandyRequest, new UpdateCandyRequest().handle, new CandyController().update);
 router.get('/candies', VerifyIfIsAuthenticated,  new CandyController().index);
 router.get('/candies/:id', VerifyIfIsAuthenticated,  new CandyController().show);
 router.delete('/candies/:id', VerifyIfIsAuthenticated,  new CandyController().destroy);
+
 
 export { router }
