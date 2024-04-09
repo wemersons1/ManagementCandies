@@ -19,7 +19,7 @@ class UpdateUserService {
         });
 
         if(!user) {
-            throw new Error("Usuário não encontrado");
+            return null;
         }
 
         let data = {

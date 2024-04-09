@@ -15,7 +15,11 @@ import { CandyReportService } from '../services/candy/CandyReportService';
 class CandyController {
 
     async store(req: Request, res: Response) {
-        const { filename: image } = req.file;
+        let image = '';
+        if(typeof req.file != 'undefined') {
+            const { filename } = req.file;
+            image = filename;
+        }
         const {
             name,
             quantity,
@@ -36,7 +40,12 @@ class CandyController {
 
     async update(req: Request, res: Response) {
         const { id } = req.params;
-        const { filename: image } = req.file;
+        let image = null;
+        if(typeof req.file != 'undefined') {
+            const { filename } = req.file;
+            image = filename;
+        }
+    
         const {
             name,
             quantity,
@@ -74,8 +83,10 @@ class CandyController {
     async destroy(req: Request, res: Response) {
         const { id } = req.params;
         const deleteCandyService = new DeleteCandyService();
-        await deleteCandyService.execute(id);
-
+        const candy = await deleteCandyService.execute(id);
+        if(!candy) {
+            return res.status(404).end(); 
+        }
         return res.status(204).end();
     }
 
@@ -84,7 +95,7 @@ class CandyController {
         const candyImageService = new CandyImageService();
         const candyImage = await candyImageService.execute(filename);
 
-        return res.json(candyImage);
+        return res.send(candyImage);
     }
 
     async report(req: Request, res: Response) {

@@ -10,7 +10,7 @@ class GetCandyByIdService {
         });
 
         if(!candy) {
-          throw new Error("Doce não encontrado");
+          return null;
         }
 
         return await dbClient.candy.findFirst({

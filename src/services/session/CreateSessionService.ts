@@ -18,13 +18,13 @@ class CreateSessionService {
         });
 
         if(!user) {
-            throw new Error("Usuário ou senha inválidos");
+            return null;
         }
 
-        const passwordIsMatch = compare(password, user.password);
+        const passwordIsMatch = await compare(password, user.password);
 
         if(!passwordIsMatch) {
-            throw new Error("Usuário ou senha inválidos");
+            return null;
         }
 
         const secret = process.env.JWT_SECRET;

@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { CreateUserService } from '../services/user/CreateUserService';
-import { validationResult } from "express-validator";
 import { GetUserByIdService } from "../services/user/GetUserByIdService";
 import { UpdateUserService } from "../services/user/UpdateUserService";
 
@@ -9,7 +8,11 @@ class UserController {
         const userService = new CreateUserService();
         const newUser = await userService.execute(req.body);
         
-        return res.json(newUser);
+        if(userService) {
+            return res.json(newUser);
+        }
+
+        return res.status(401).end();
     }
 
     async me(req: Request, res: Response) {

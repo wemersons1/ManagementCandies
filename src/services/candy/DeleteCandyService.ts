@@ -9,9 +9,10 @@ class DeleteCandyService {
         });
 
         if(!candy) {
-            throw new Error("Doce não encontrado");
+            return null;
         }
 
+  
         return await dbClient.candy.delete({
                 where: {
                     id

@@ -3,7 +3,7 @@ import { dbClient } from "../../dbClient";
 interface CandyInterface {
     name: string;
     quantity: number;
-    image: string;
+    image: any;
     price: number,
     category_id: number;
 }
@@ -17,14 +17,24 @@ class UpdateCandyService {
         });
 
         if(!Candy) {
-            throw new Error("Doce não encontrado");
+            return null;
+        }
+
+        const data = {};
+        data['name'] = candyData.name;
+        data['quantity'] = candyData.quantity;
+        data['price'] = candyData.price;
+        data['category_id'] = candyData.category_id;
+     
+        if(candyData.image) {
+            data['image'] = candyData.image;
         }
 
         return await dbClient.candy.update({
                 where: {
                     id
                 },
-                data: candyData
+                data
             });
     }
 }

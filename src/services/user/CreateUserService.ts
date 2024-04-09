@@ -18,7 +18,7 @@ class CreateUserService {
         });
 
         if(userAlreadExist) {
-            throw new Error("Usuário já cadastrado");
+            return null;
         }
         
         const passwordHash = await hash(password, 8);

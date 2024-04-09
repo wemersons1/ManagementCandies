@@ -16,7 +16,7 @@ class CandyReportService {
                         reject(error);
                     }
                    
-                    resolve(results[0]);
+                    resolve(results);
                   });
             });
     }

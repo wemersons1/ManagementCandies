@@ -9,7 +9,7 @@ class DeleteCandyCategoryService {
         });
 
         if(!candyCategory) {
-            throw new Error("Categoria não encontrada");
+            return null;
         }
 
         return await dbClient.candyCategory.delete({

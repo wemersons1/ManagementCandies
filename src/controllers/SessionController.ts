@@ -10,7 +10,11 @@ class SessionController {
             password
         });
 
-        return res.json(newSession);
+        if(newSession) {
+            return res.json(newSession);
+        }
+
+        return res.status(401).end();
     } 
     
     async destroy() {
